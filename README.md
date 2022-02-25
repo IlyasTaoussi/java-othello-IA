@@ -1,1 +1,1 @@
-Othello IA in Java
+application.Othello IA in Java
