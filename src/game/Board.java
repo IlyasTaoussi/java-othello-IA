@@ -32,6 +32,32 @@ public class Board {
         board[INITIAL_POSITIONS_BLACK[1].getX()][INITIAL_POSITIONS_BLACK[1].getY()] = Color.BLACK;
     }
 
+    public void setRow(int rowIndex, Color[] row){
+        board[rowIndex] = row;
+    }
+
+    public Color[] getRow(int rowIndex){
+        return board[rowIndex];
+    }
+
+    public void setColumn(int columnIndex, Color[] column){
+        for(int i=0; i<board.length; i++){
+            board[i][columnIndex] = column[i];
+        }
+    }
+
+    public Color[] getColumn(int columnIndex){
+        Color[] column = new Color[board.length];
+        for(int i=0; i< board.length; i++){
+            column[i] = board[i][columnIndex];
+        }
+        return column;
+    }
+
+    public void getAvailablePositions(Color color){
+
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
