@@ -347,6 +347,10 @@ public class Board {
                 disk.setColor(color);
                 updateBoard(disk);
             }
+            else{
+                disk.setColor(Color.EMPTY);
+                updateBoard(disk);
+            }
         }
     }
 
