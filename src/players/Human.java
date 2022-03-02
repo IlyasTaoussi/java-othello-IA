@@ -1,5 +1,6 @@
 package players;
 
+import game.Board;
 import game.Color;
 
 public class Human {
@@ -22,4 +23,8 @@ public class Human {
     public Color getColor() { return color; }
 
     public void setColor(Color color) { this.color = color; }
+
+    public boolean canPlay(Board board) {
+        return !board.getAllAvailablePlays(this.color).isEmpty();
+    }
 }

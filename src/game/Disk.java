@@ -41,4 +41,11 @@ public class Disk {
         return Color.BLACK;
     }
 
+    @Override
+    public String toString() {
+        return "Disk{" +
+                "color=" + color +
+                ", pos=" + pos +
+                '}';
+    }
 }

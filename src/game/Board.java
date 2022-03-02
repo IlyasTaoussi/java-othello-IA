@@ -306,8 +306,8 @@ public class Board {
         ArrayList<ArrayList<Disk>> availablePlays;
         HashMap<Disk, ArrayList<ArrayList<Disk>>> possiblePaths = new HashMap<>();
         for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board.length; i++){
-                disk = board[i][j];
+            for(int j = 0; j < board.length; j++){
+                disk = new Disk(board[i][j].getColor(), board[i][j].getPos());
                 if(disk.getColor() == Color.EMPTY){
                     disk.setColor(color);
                     availablePlays = getAvailablePlays(disk);
@@ -318,6 +318,9 @@ public class Board {
             }
         }
         updateBoard(possiblePaths);
+        for(var t : possiblePaths.keySet()) {
+            System.out.println(t + " " + possiblePaths.get(t));
+        }
         return possiblePaths;
     }
 
@@ -356,6 +359,16 @@ public class Board {
                 }
             }
         }
+    }
+
+    public boolean isFull() {
+        for(int i = 0; i< board.length; i++) {
+            for(int j = 0; j<board[0].length; j++) {
+                if(board[i][j].getColor() == Color.EMPTY)
+                    return false;
+            }
+        }
+        return true;
     }
 
     @Override
