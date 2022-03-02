@@ -3,8 +3,19 @@ package game;
 import java.util.Objects;
 
 public class Position {
+    public final static int[][] positional = new int[][]{
+            {500, -150, 30, 10, 10, 30, -150, 500},
+            {-150, -250, 0, 0, 0, 0, -250, -150},
+            {30, 0, 1, 2, 2, 1, 0, 30},
+            {10, 0, 2, 16, 2, 0, 10},
+            {30, 0, 1, 2, 2, 1, 0, 30},
+            {-150, -250, 0, 0, 0, 0, -250, -150},
+            {500, -150, 30, 10, 10, 30, -150, 500}
+    };
+
     private int x;
     private int y;
+    private int score;
 
     public Position(int x, int y) {
         this.x = x;
@@ -25,15 +36,6 @@ public class Position {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public boolean isInside(Position[] positions){
-        for(int i = 0; i < positions.length; i++){
-            if(this.equals(positions[i])){
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
