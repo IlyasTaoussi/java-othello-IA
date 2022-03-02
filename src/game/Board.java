@@ -311,7 +311,9 @@ public class Board {
                 if(disk.getColor() == Color.EMPTY){
                     disk.setColor(color);
                     availablePlays = getAvailablePlays(disk);
-                    if(!availablePlays.isEmpty()) possiblePaths.put(new Disk(Color.POSSIBLE,disk.getPos()), availablePlays);
+                    if(!availablePlays.isEmpty()){
+                        possiblePaths.put(new Disk(Color.POSSIBLE,disk.getPos()), availablePlays);
+                    }
                 }
             }
         }
@@ -348,8 +350,10 @@ public class Board {
                 updateBoard(disk);
             }
             else{
-                disk.setColor(Color.EMPTY);
-                updateBoard(disk);
+                if(getDiskFromPos(disk.getPos()).getColor() == Color.POSSIBLE){
+                    disk.setColor(Color.EMPTY);
+                    updateBoard(disk);
+                }
             }
         }
     }
