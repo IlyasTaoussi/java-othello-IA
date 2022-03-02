@@ -24,10 +24,10 @@ public class Board {
     private void init() {
         board = new Disk[8][8];
 
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                board[i][j] = new Disk();
-                board[i][j].setPos(new Position(i, j));
+        for (int x = 0; x < board.length; x++) {
+            for (int y = 0; y < board[0].length; y++) {
+                board[x][y] = new Disk();
+                board[x][y].setPos(new Position(x, y));
             }
         }
         board[INITIAL_POSITIONS_WHITE[0].getX()][INITIAL_POSITIONS_WHITE[0].getY()].setColor(Color.WHITE);
@@ -305,9 +305,9 @@ public class Board {
         Disk disk;
         ArrayList<ArrayList<Disk>> availablePlays;
         HashMap<Disk, ArrayList<ArrayList<Disk>>> possiblePaths = new HashMap<>();
-        for(int i = 0; i < board.length; i++){
-            for(int j = 0; j < board.length; j++){
-                disk = new Disk(board[i][j].getColor(), board[i][j].getPos());
+        for(int x = 0; x < board.length; x++){
+            for(int y = 0; y < board.length; y++){
+                disk = new Disk(board[x][y].getColor(), board[x][y].getPos());
                 if(disk.getColor() == Color.EMPTY){
                     disk.setColor(color);
                     availablePlays = getAvailablePlays(disk);
@@ -359,27 +359,37 @@ public class Board {
     }
 
     public boolean isFull() {
-        for(int i = 0; i< board.length; i++) {
-            for(int j = 0; j<board[0].length; j++) {
-                if(board[i][j].getColor() == Color.EMPTY)
+        for(int x = 0; x< board.length; x++) {
+            for(int y = 0; y<board[0].length; y++) {
+                if(board[x][y].getColor() == Color.EMPTY)
                     return false;
             }
         }
         return true;
+    }
+    
+    public int getNumberOfDisks(Color color){
+        int counter = 0;
+        for(int x=0; x < board.length; x++){
+            for(int y=0; y < board.length; y++){
+                if(board[x][y].getColor() == color) counter++;
+            }
+        }
+        return counter;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Board :\n ");
-        for (int i = 0; i < board.length; i++) {
-            sb.append("   ").append(i);
+        for (int x = 0; x < board.length; x++) {
+            sb.append("   ").append(x);
         }
         sb.append("\n");
-        for (int i = 0; i < board.length; i++) {
-            sb.append(i).append("   ");
-            for (int j = 0; j < board[0].length; j++) {
-                sb.append(board[i][j].getColor()).append("   ");
+        for (int x = 0; x < board.length; x++) {
+            sb.append(x).append("   ");
+            for (int y = 0; y < board[0].length; y++) {
+                sb.append(board[x][y].getColor()).append("   ");
             }
             sb.append("\n");
         }
