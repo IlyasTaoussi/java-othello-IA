@@ -55,7 +55,6 @@ public class Board {
             x = X - 2;
             while (board[x][Y].getColor() != Color.EMPTY) {
                 if (board[x][Y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[x][Y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[x][Y].getPos()));
@@ -81,7 +80,6 @@ public class Board {
             x = X + 2;
             while (board[x][Y].getColor() != Color.EMPTY) {
                 if (board[x][Y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[x][Y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[x][Y].getPos()));
@@ -101,13 +99,12 @@ public class Board {
 
         int y;
 
-        if (board[X][Y+1].getColor() == disk.getColor()) {
+        if (board[X][Y+1].getColor() == disk.getOpponentColor()) {
             updatedDisks = new ArrayList<>();
             updatedDisks.add(new Disk(disk.getColor(), board[X][Y+1].getPos()));
             y = Y + 2;
             while (board[X][y].getColor() != Color.EMPTY) {
                 if (board[X][y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[0][y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[X][y].getPos()));
@@ -132,7 +129,6 @@ public class Board {
             y = Y - 2;
             while (board[X][y].getColor() != Color.EMPTY) {
                 if (board[X][y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[X][y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[X][y].getPos()));
@@ -158,7 +154,6 @@ public class Board {
             y = Y + 2;
             while (board[x][y].getColor() != Color.EMPTY) {
                 if (board[x][y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
@@ -185,7 +180,6 @@ public class Board {
             y = Y - 2;
             while (board[x][y].getColor() != Color.EMPTY) {
                 if (board[x][y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
@@ -212,7 +206,6 @@ public class Board {
             y = Y - 2;
             while (board[x][y].getColor() != Color.EMPTY) {
                 if (board[x][y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
@@ -239,7 +232,6 @@ public class Board {
             y = Y + 2;
             while (board[x][y].getColor() != Color.EMPTY) {
                 if (board[x][y].getColor() == disk.getColor()) {
-                    updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
                     return updatedDisks;
                 } else {
                     updatedDisks.add(new Disk(disk.getColor(), board[x][y].getPos()));
@@ -318,9 +310,6 @@ public class Board {
             }
         }
         updateBoard(possiblePaths);
-        for(var t : possiblePaths.keySet()) {
-            System.out.println(t + " " + possiblePaths.get(t));
-        }
         return possiblePaths;
     }
 
