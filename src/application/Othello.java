@@ -5,6 +5,7 @@ import game.Color;
 import game.Position;
 import players.Human;
 
+import java.awt.*;
 import java.util.Scanner;
 
 public class Othello {
@@ -34,6 +35,20 @@ public class Othello {
                 b.updateBoard(playerTwo.getPlays(), pos, playerTwo.getColor());
                 System.out.println(b);
             }
+        }
+        System.out.println("The game is over");
+        int nbPlayerOne = b.getNumberOfDisks(playerOne.getColor());
+        int nbPlayerTwo = b.getNumberOfDisks(playerTwo.getColor());
+        if(nbPlayerOne == nbPlayerTwo) {
+            System.out.println("It's a draw");
+        }
+        else if(nbPlayerOne > nbPlayerTwo) {
+            System.out.println(playerOne.getName() + " wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
+                    nbPlayerTwo + " " + playerTwo.getColor());
+        }
+        else {
+            System.out.println(playerTwo.getName() + "wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
+                    nbPlayerTwo + " " + playerTwo.getColor());
         }
     }
 }
