@@ -18,21 +18,20 @@ public class Othello {
 
         while(!b.isFull()) {
             if(playerOne.canPlay(b)) {
-                var map = b.getAllAvailablePlays(playerOne.getColor());
+                System.out.println(playerOne.getPlays());
                 System.out.println(b);
                 int i = sc.nextInt();
                 int j = sc.nextInt();
                 pos = new Position(i,j);
-                b.updateBoard(map, pos, playerOne.getColor());
+                b.updateBoard(playerOne.getPlays(), pos, playerOne.getColor());
                 System.out.println(b);
             }
             if(playerTwo.canPlay(b)) {
-                var map = b.getAllAvailablePlays(playerTwo.getColor());
                 System.out.println(b);
                 int i = sc.nextInt();
                 int j = sc.nextInt();
                 pos = new Position(i,j);
-                b.updateBoard(map, pos, playerTwo.getColor());
+                b.updateBoard(playerTwo.getPlays(), pos, playerTwo.getColor());
                 System.out.println(b);
             }
         }
