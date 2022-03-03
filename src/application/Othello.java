@@ -21,11 +21,11 @@ public class Othello {
         }
         else if(nbPlayerOne > nbPlayerTwo) {
             System.out.println(playerOne.getName() + " wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
-                    nbPlayerTwo + " " + playerTwo.getColor());
+                    nbPlayerTwo + " " + playerTwo.getColor() + ")");
         }
         else {
             System.out.println(playerTwo.getName() + "wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
-                    nbPlayerTwo + " " + playerTwo.getColor());
+                    nbPlayerTwo + " " + playerTwo.getColor() + ")");
         }
     }
 
@@ -38,11 +38,11 @@ public class Othello {
         }
         else if(nbPlayerOne > nbPlayerIA) {
             System.out.println(playerOne.getName() + " wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
-                    nbPlayerIA + " " + playerIA.getColor());
+                    nbPlayerIA + " " + playerIA.getColor() + ")");
         }
         else {
             System.out.println(playerIA.getName() + "wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
-                    nbPlayerIA + " " + playerIA.getColor());
+                    nbPlayerIA + " " + playerIA.getColor() + ")");
         }
     }
 
@@ -51,15 +51,16 @@ public class Othello {
         int nbPlayerIAOne = board.getNumberOfDisks(playerIAOne.getColor());
         int nbPlayerIATwo = board.getNumberOfDisks(playerIATwo.getColor());
         if(nbPlayerIAOne == nbPlayerIATwo) {
-            System.out.println("It's a draw");
+            System.out.println("It's a draw" + "(" + nbPlayerIAOne + " " + playerIAOne.getColor() + " / " +
+                    nbPlayerIATwo + " " + playerIATwo.getColor() + ")");
         }
         else if(nbPlayerIAOne > nbPlayerIATwo) {
             System.out.println(playerIAOne.getName() + " wins (" + nbPlayerIAOne + " " + playerIAOne.getColor() + " / " +
-                    nbPlayerIATwo + " " + playerIATwo.getColor());
+                    nbPlayerIATwo + " " + playerIATwo.getColor() + ")");
         }
         else {
-            System.out.println(playerIATwo.getName() + "wins (" + nbPlayerIAOne + " " + playerIAOne.getColor() + " / " +
-                    nbPlayerIATwo + " " + playerIATwo.getColor());
+            System.out.println(playerIATwo.getName() + " wins (" + nbPlayerIAOne + " " + playerIAOne.getColor() + " / " +
+                    nbPlayerIATwo + " " + playerIATwo.getColor() + ")");
         }
     }
 
@@ -69,8 +70,8 @@ public class Othello {
         Human playerOne = new Human("Ilyas", Color.BLACK);
         Human playerTwo = new Human("Birkan", Color.WHITE);
 
-        IA playerIAOne = new IA("IA 1", Color.BLACK, Strategy.POSITIONAL);
-        IA playerIATwo = new IA("IA 2", Color.WHITE, Strategy.POSITIONAL);
+        IA playerIAOne = new IA("IA 1", Color.WHITE, Strategy.POSITIONAL);
+        IA playerIATwo = new IA("IA 2", Color.BLACK, Strategy.POSITIONAL);
 
         Scanner sc = new Scanner(System.in);
 /*
@@ -85,7 +86,7 @@ public class Othello {
         getWinner(playerOne, playerTwo, b);
 */
 
-        while(!b.isFull()) {
+/*        while(!b.isFull()) {
             if(playerOne.canPlay(b)) {
                 playerOne.play(b, sc);
             }
@@ -94,18 +95,18 @@ public class Othello {
             }
         }
         getWinner(playerOne, playerIAOne, b);
+*/
 
-/*
         while(!b.isFull()) {
             if(playerIAOne.canPlay(b)) {
-                playerOne.play(b, sc);
+                playerIAOne.play(b);
             }
             if(playerIATwo.canPlay(b)) {
                 playerIATwo.play(b);
             }
+            System.out.println(b);
         }
-        getWinner(playerOne, playerIAOne, b);
+        getWinner(playerIAOne, playerIATwo, b);
 
- */
     }
 }

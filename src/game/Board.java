@@ -273,11 +273,15 @@ public class Board {
                 availablePlay = searchWest(disk);
                 if(availablePlay != null) availablePlays.add(availablePlay);
             }
-            if(X != 0 && ( Y != 0 && Y != 7 )){
-                availablePlay = searchNorthWest(disk);
-                if(availablePlay != null) availablePlays.add(availablePlay);
-                availablePlay = searchNorthEast(disk);
-                if(availablePlay != null) availablePlays.add(availablePlay);
+            if(X != 0){
+                if(0 < Y && Y <= 7){
+                    availablePlay = searchNorthWest(disk);
+                    if(availablePlay != null) availablePlays.add(availablePlay);
+                }
+                if(0 <= Y && Y < 7){
+                    availablePlay = searchNorthEast(disk);
+                    if(availablePlay != null) availablePlays.add(availablePlay);
+                }
                 availablePlay = searchNorth(disk);
                 if(availablePlay != null) availablePlays.add(availablePlay);
             }

@@ -4,7 +4,7 @@ import game.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
+import java.util.Random;
 
 public class IA {
 
@@ -25,17 +25,22 @@ public class IA {
     }
 
     public Position getPositionalStrategyBestPlay(){
-        Position bestPlay = new Position(0,0);
+        ArrayList<Position> evenScores = new ArrayList<>();
         int bestScore = Integer.MIN_VALUE;
         int score;
         for(Disk disk : plays.keySet()){
             score = Position.positional[disk.getPos().getX()][disk.getPos().getY()];
             if(score > bestScore){
                 bestScore = score;
-                bestPlay = disk.getPos();
+                evenScores = new ArrayList<>();
+                evenScores.add(disk.getPos());
+            }
+            if(score == bestScore){
+                evenScores.add(disk.getPos());
             }
         }
-        return bestPlay;
+        Random random = new Random();
+        return evenScores.get(random.nextInt(evenScores.size()));
     }
 
     public void positionalStrategy(Board board){
