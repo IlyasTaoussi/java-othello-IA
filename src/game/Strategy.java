@@ -1,5 +1,5 @@
 package game;
 
 public enum Strategy {
-    POSITIONAL;
+    POSITIONAL, MOBILITY, ABSOLUTE, MIXED;
 }
