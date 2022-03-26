@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class IA extends Player{
     private Strategy strategy;
+    private Board simulationBoard;
 
     public IA(String name, Color color, Strategy strategy){
         super(name, color);

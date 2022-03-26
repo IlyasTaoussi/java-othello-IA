@@ -18,6 +18,11 @@ public class Disk {
         this.pos = pos;
     }
 
+    public Disk(Disk disk) {
+        this.color = disk.color;
+        this.pos = new Position(disk.getPos().getX(), disk.getPos().getY());
+    }
+
     public Position getPos() {
         return pos;
     }

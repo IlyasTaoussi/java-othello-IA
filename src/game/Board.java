@@ -1,6 +1,8 @@
 package game;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +21,15 @@ public class Board {
 
     public Board() {
         this.init();
+    }
+
+    public Board(Board board) {
+        this.board = new Disk[8][8];
+        for(int i = 0; i<board.board.length; i++) {
+            for(int j = 0; j<board.board.length; j++) {
+                this.board[i][j] = new Disk(board.board[i][j]);
+            }
+        }
     }
 
     private void init() {
