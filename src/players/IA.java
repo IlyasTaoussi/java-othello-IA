@@ -81,4 +81,12 @@ public class IA extends Player{
             mixedStrategy(board);
         }
     }
+
+    public void simulatePlay(Disk disk, Board board){
+        board.updateBoard(this.getPlays(), disk.getPos(), disk.getColor());
+    }
+
+    public int getNumberOfDisks(Color color, Board board){
+        return board.getNumberOfDisks(color);
+    }
 }

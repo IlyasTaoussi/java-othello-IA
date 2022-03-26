@@ -41,4 +41,5 @@ public abstract class Player {
         this.plays = board.getAllAvailablePlays(this.color);
         return !plays.isEmpty();
     }
+
 }
