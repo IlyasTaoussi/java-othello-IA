@@ -3,9 +3,6 @@ package players;
 import game.*;
 import tree.Node;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 public class IA extends Player{
     private Strategy strategy;
     private Node tree;
@@ -16,11 +13,11 @@ public class IA extends Player{
         this.tree = null;
     }
 
-    private static void createTree(Node node, int depth, Color color) {
+    private void createTree(Node node, int depth, Color color, Strategy strategy) {
         var plays = node.getBoard().getAllAvailablePlays(color);
-        if(depth == 7 || plays.keySet().size() == 0) {
-            node.calculateWeight(Strategy.MOBILITY);
-            return;
+        if(depth == 3 || plays.keySet().size() == 0) {
+            node.calculateWeight(strategy);
+            return ;
         }
         if(node.getChildren().isEmpty()) {
             for (Disk disk : plays.keySet()) {
@@ -29,78 +26,46 @@ public class IA extends Player{
                 Node n = new Node(board, new Disk(disk));
                 node.addChild(n);
                 if (color == Color.WHITE)
-                    createTree(n, depth + 1, Color.BLACK);
+                    createTree(n, depth + 1, Color.BLACK, strategy);
                 else
-                    createTree(n, depth + 1, Color.WHITE);
+                    createTree(n, depth + 1, Color.WHITE, strategy);
             }
         }
         else {
             for(Node n : node.getChildren()) {
-                if(color == Color.WHITE) createTree(n, depth+1, Color.BLACK);
-                else createTree(n, depth+1, Color.WHITE);
+                if(color == Color.WHITE) createTree(n, depth+1, Color.BLACK, strategy);
+                else createTree(n, depth+1, Color.WHITE, strategy);
             }
         }
     }
 
-    public Position getPositionalStrategyBestPlay(){
-        /*ArrayList<Position> evenScores = new ArrayList<>();
-        int bestScore = Integer.MIN_VALUE;
-        int score;
-        for(Disk disk : plays.keySet()){
-            score = Position.positional[disk.getPos().getX()][disk.getPos().getY()];
-            if(score > bestScore){
-                bestScore = score;
-                evenScores = new ArrayList<>();
-                evenScores.add(disk.getPos());
-            }
-            if(score == bestScore){
-                evenScores.add(disk.getPos());
-            }
-        }
-        Random random = new Random();
-        return evenScores.get(random.nextInt(evenScores.size()));*/
-        createTree(tree, 0, color);
+    public Position getStrategyBestPlay(Strategy strategy){
+        createTree(tree, 0, color, strategy);
         Node node = alphaBeta(0, tree, true, Integer.MIN_VALUE, Integer.MAX_VALUE);
         for(Node n : node.getChildren()) {
             if(n.getWeight() == node.getWeight()) {
-                tree = node;
+                tree = n;
                 break;
             }
         }
-        return node.getDisk().getPos();
+        return tree.getDisk().getPos();
     }
 
-    public void positionalStrategy(Board board){
-        board.updateBoard(plays, getPositionalStrategyBestPlay(), color);
+    public void applyStrategy(Board board, Strategy strategy){
+        board.updateBoard(plays, getStrategyBestPlay(strategy), color);
     }
 
 
-    private Position getMobilityStrategyBestPlay() {
-        // TO DO
-
-        return null;
-    }
-
-    public void mobilityStrategy(Board board) {
-        board.updateBoard(plays, getMobilityStrategyBestPlay(), color);
-    }
-
-    private Position getAbsoluteBestPlay() {
-        // TO DO
-        return null;
-    }
-
-    public void absoluteStrategy(Board board) {
-        board.updateBoard(plays, getAbsoluteBestPlay(), color);
-    }
-
-    public Position getMixedBestPlay() {
-        // TO DO
-        return null;
-    }
-
-    public void mixedStrategy(Board board) {
-        board.updateBoard(plays, getMixedBestPlay(), color);
+    public void mixedStrategy(Board board, int counter) {
+        if(counter <= 10){
+            applyStrategy(board, Strategy.POSITIONAL);
+        }
+        else if(10 < counter && counter <= 20){
+            applyStrategy(board, Strategy.MOBILITY);
+        }
+        else{
+            applyStrategy(board, Strategy.ABSOLUTE);
+        }
     }
 
     public Node alphaBeta(int depth, Node node, boolean maximizing, int alpha, int beta) {
@@ -136,19 +101,11 @@ public class IA extends Player{
         return node;
     }
 
-    public void play(Board board){
+    public void play(Board board, int counter){
         if(tree == null) tree = new Node(board);
-        if(strategy == Strategy.POSITIONAL) {
-            positionalStrategy(board);
-        }
-        else if(strategy == Strategy.MOBILITY) {
-            mobilityStrategy(board);
-        }
-        else if(strategy == Strategy.ABSOLUTE) {
-            absoluteStrategy(board);
-        }
-        else {
-            mixedStrategy(board);
+        if(strategy != Strategy.MIXED) applyStrategy(board, strategy);
+        else{
+            mixedStrategy(board, counter);
         }
     }
 

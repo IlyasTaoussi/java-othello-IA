@@ -36,8 +36,10 @@ public class Othello {
         Human playerOne = new Human("Ilyas", Color.BLACK);
         Human playerTwo = new Human("Birkan", Color.WHITE);
 
-        IA playerIAOne = new IA("IA 1", Color.WHITE, Strategy.POSITIONAL);
-        IA playerIATwo = new IA("IA 2", Color.BLACK, Strategy.POSITIONAL);
+        IA playerIAOne = new IA("IA 1", Color.WHITE, Strategy.ABSOLUTE);
+        IA playerIATwo = new IA("IA 2", Color.BLACK, Strategy.MOBILITY);
+
+        int counter = 0;
 
         Scanner sc = new Scanner(System.in);
 /*
@@ -63,14 +65,14 @@ public class Othello {
 
         while(!b.isFull()) {
             if(playerIAOne.canPlay(b)) {
-                playerIAOne.play(b);
+                playerIAOne.play(b, counter);
             }
             if(playerIATwo.canPlay(b)) {
-                playerIATwo.play(b);
+                playerIATwo.play(b, counter);
             }
+            counter++;
             System.out.println(b);
         }
         getWinner(playerIAOne, playerIATwo, b);
-
     }
 }
