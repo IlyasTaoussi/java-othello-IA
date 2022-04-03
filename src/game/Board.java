@@ -332,7 +332,7 @@ public class Board {
                 }
             }
         }
-        updateBoard(possiblePaths);
+        //updateBoard(possiblePaths);
         return possiblePaths;
     }
 
@@ -364,12 +364,13 @@ public class Board {
                 disk.setColor(color);
                 updateBoard(disk);
             }
+            /*
             else{
                 if(getDiskFromPos(disk.getPos()).getColor() == Color.POSSIBLE){
                     disk.setColor(Color.EMPTY);
                     updateBoard(disk);
                 }
-            }
+            }*/
         }
     }
 
