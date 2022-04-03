@@ -2,13 +2,11 @@ package application;
 
 import game.Board;
 import game.Color;
-import game.Position;
 import game.Strategy;
 import players.Human;
 import players.IA;
 import players.Player;
 
-import java.awt.*;
 import java.util.Scanner;
 
 public class Othello {
@@ -25,7 +23,7 @@ public class Othello {
                     nbPlayerTwo + " " + playerTwo.getColor() + ")");
         }
         else {
-            System.out.println(playerTwo.getName() + "wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
+            System.out.println(playerTwo.getName() + " wins (" + nbPlayerOne + " " + playerOne.getColor() + " / " +
                     nbPlayerTwo + " " + playerTwo.getColor() + ")");
         }
     }
@@ -36,7 +34,7 @@ public class Othello {
         Human playerOne = new Human("Ilyas", Color.BLACK);
         Human playerTwo = new Human("Birkan", Color.WHITE);
 
-        IA playerIAOne = new IA("IA 1", Color.WHITE, Strategy.ABSOLUTE);
+        IA playerIAOne = new IA("IA 1", Color.WHITE, Strategy.MIXED);
         IA playerIATwo = new IA("IA 2", Color.BLACK, Strategy.MOBILITY);
 
         int counter = 0;
@@ -62,7 +60,7 @@ public class Othello {
             }
         }
 */
-
+        long start = System.currentTimeMillis();
         while(!b.isFull()) {
             if(playerIAOne.canPlay(b)) {
                 playerIAOne.play(b, counter);
@@ -73,6 +71,25 @@ public class Othello {
             counter++;
             System.out.println(b);
         }
+        long end = System.currentTimeMillis() - start;
         getWinner(playerIAOne, playerIATwo, b);
+        System.out.println(counter);
+        System.out.println(timeToHMS(end/1000));
+    }
+
+    public static String timeToHMS(long tempsS) {
+
+        int h = (int) (tempsS / 3600);
+        int m = (int) ((tempsS % 3600) / 60);
+        int s = (int) (tempsS % 60);
+
+        String r="";
+
+        if(h>0) {r+=h+" h ";}
+        if(m>0) {r+=m+" min ";}
+        if(s>0) {r+=s+" s";}
+        if(h<=0 && m<=0 && s<=0) {r="0 s";}
+
+        return r;
     }
 }
