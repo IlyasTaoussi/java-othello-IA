@@ -15,7 +15,7 @@ public class IA extends Player{
 
     private void createTree(Node node, int depth, Color color, Strategy strategy) {
         var plays = node.getBoard().getAllAvailablePlays(color);
-        if(depth == 3 || plays.keySet().size() == 0) {
+        if(depth == 5 || plays.keySet().size() == 0) {
             node.calculateWeight(strategy);
             return ;
         }
@@ -69,7 +69,7 @@ public class IA extends Player{
     }
 
     public Node alphaBeta(int depth, Node node, boolean maximizing, int alpha, int beta) {
-        if(depth == 3) {
+        if(depth == 5) {
             node.calculateWeight(this.strategy);
             return node;
         }
@@ -102,7 +102,7 @@ public class IA extends Player{
     }
 
     public void play(Board board, int counter){
-        if(tree == null) tree = new Node(board);
+        tree = new Node(board);
         if(strategy != Strategy.MIXED) applyStrategy(board, strategy);
         else{
             mixedStrategy(board, counter);
