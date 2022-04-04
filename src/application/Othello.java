@@ -4,7 +4,7 @@ import game.Board;
 import game.Color;
 import game.Strategy;
 import players.Human;
-import players.IA;
+import players.AI;
 import players.Player;
 
 import java.util.Scanner;
@@ -33,14 +33,16 @@ public class Othello {
 
         Human playerOne = new Human("Ilyas", Color.BLACK);
         Human playerTwo = new Human("Birkan", Color.WHITE);
+        Scanner sc = new Scanner(System.in);
 
-        IA playerIAOne = new IA("IA 1", Color.WHITE, Strategy.MIXED);
-        IA playerIATwo = new IA("IA 2", Color.BLACK, Strategy.MOBILITY);
+        AI playerIAOne = new AI("IA 1", Color.WHITE, Strategy.ABSOLUTE);
+        AI playerIATwo = new AI("IA 2", Color.BLACK, Strategy.MOBILITY);
 
         int counter = 0;
-
-        Scanner sc = new Scanner(System.in);
+        long start = System.currentTimeMillis();
 /*
+
+        // Human VS Human
         while(!b.isFull()) {
             if(playerOne.canPlay(b)) {
                 playerOne.play(b, sc);
@@ -49,9 +51,9 @@ public class Othello {
                 playerTwo.play(b, sc);
             }
         }
-*/
 
-/*        while(!b.isFull()) {
+        // Human VS IA
+        while(!b.isFull()) {
             if(playerOne.canPlay(b)) {
                 playerOne.play(b, sc);
             }
@@ -60,7 +62,6 @@ public class Othello {
             }
         }
 */
-        long start = System.currentTimeMillis();
         while(!b.isFull()) {
             if(playerIAOne.canPlay(b)) {
                 playerIAOne.play(b, counter);
@@ -71,9 +72,9 @@ public class Othello {
             counter++;
             System.out.println(b);
         }
+
         long end = System.currentTimeMillis() - start;
         getWinner(playerIAOne, playerIATwo, b);
-        System.out.println(counter);
         System.out.println(timeToHMS(end/1000));
     }
 
