@@ -6,6 +6,7 @@ import tree.Node;
 public class IA extends Player{
     private Strategy strategy;
     private Node tree;
+    private static final int MAX_DEPTH = 5;
 
     public IA(String name, Color color, Strategy strategy){
         super(name, color);
@@ -15,7 +16,7 @@ public class IA extends Player{
 
     private void createTree(Node node, int depth, Color color, Strategy strategy) {
         var plays = node.getBoard().getAllAvailablePlays(color);
-        if(depth == 5 || plays.keySet().size() == 0) {
+        if(depth == IA.MAX_DEPTH || plays.keySet().size() == 0) {
             node.calculateWeight(strategy);
             return ;
         }
@@ -69,7 +70,7 @@ public class IA extends Player{
     }
 
     public Node alphaBeta(int depth, Node node, boolean maximizing, int alpha, int beta) {
-        if(depth == 5) {
+        if(depth == IA.MAX_DEPTH) {
             node.calculateWeight(this.strategy);
             return node;
         }
