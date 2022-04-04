@@ -363,14 +363,8 @@ public class Board {
                 updateBoard(possiblePaths.get(disk));
                 disk.setColor(color);
                 updateBoard(disk);
+                break;
             }
-            /*
-            else{
-                if(getDiskFromPos(disk.getPos()).getColor() == Color.POSSIBLE){
-                    disk.setColor(Color.EMPTY);
-                    updateBoard(disk);
-                }
-            }*/
         }
     }
 
